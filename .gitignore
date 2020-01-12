@@ -1,0 +1,9 @@
+# raw data
+wisdm_dataset/
+
+# processed data
+data/
+
+# notebook and cache
+.ipynb_checkpoints/
+__pycache__/ 
