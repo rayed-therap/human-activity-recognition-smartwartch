@@ -25,8 +25,7 @@ def get_activity_map():
     with open(ACTIVITY_CODE_PATH) as f:
         content = f.read()
     for line in content.splitlines():
-        if line.isspace():
-            continue
         tokens = line.split()
-        activity_map[tokens[2]] = tokens[0]
+        if tokens:
+            activity_map[tokens[2]] = tokens[0]
     return activity_map
