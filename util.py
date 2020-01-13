@@ -23,8 +23,10 @@ def read_sensor_data(sensor):
 def get_activity_map():
     activity_map = {}
     with open(ACTIVITY_CODE_PATH) as f:
-        lines = f.read().splitlines()
-    for line in lines:
+        content = f.read()
+    for line in content.splitlines():
+        if line.isspace():
+            continue
         tokens = line.split()
         activity_map[tokens[2]] = tokens[0]
     return activity_map
