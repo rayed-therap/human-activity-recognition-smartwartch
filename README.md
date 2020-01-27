@@ -93,10 +93,14 @@ An accuracy of 90% on the test set is what I was hoping for. The model does not 
 
 # V. Conclusion
 ### Free-Form Visualization
+
 <img src='images/accel_walking_x.png'>
+
 The diagram above highlights the inconsistency present in such a large dataset that had to be found and processed.
+
 ### Reflection
 The project covered the entire ML pipeline from data collection, preprocessing, visualization, to model training and evaluation. I realized that data wrangling is the most important and time consuming aspect in the entire process and was the bottle-neck for me. 
+
 ### Improvement
 A few more model variants could have been trained and evaluated. A comparision of different architectures such as DNN, CNN, and statistical models like SVMs could have also been analyzed.
 
