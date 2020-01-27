@@ -2,9 +2,6 @@
 wisdm-dataset/
 *.zip
 
-# processed data
-data/
-
 # notebook and cache
 .ipynb_checkpoints/
 __pycache__/
