@@ -25,7 +25,7 @@ The metric for this task is accuracy. Since, it is a multi-class classification 
 
 # II. Analysis
 ### Data Exploration
-The dataset is the [3] [WISDM Smartphone and Smartwatch Activity and Biometrics Dataset Data Set](https://archive.ics.uci.edu/ml/datasets/WISDM+Smartphone+and+Smartwatch+Activity+and+Biometrics+Dataset+) which contains accelerometer and gyroscope time-series sensor data collected from a smartwatch as 51 test subjects perform 18 activities for 3 minutes each. Particulars of the dataset are summarized below:
+The dataset is the [WISDM Smartphone and Smartwatch Activity and Biometrics Dataset Data Set](https://archive.ics.uci.edu/ml/datasets/WISDM+Smartphone+and+Smartwatch+Activity+and+Biometrics+Dataset+) [3] which contains accelerometer and gyroscope time-series sensor data collected from a smartwatch as 51 test subjects perform 18 activities for 3 minutes each. Particulars of the dataset are summarized below:
 
 Table 1. Dataset summary.
 
