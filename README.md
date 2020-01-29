@@ -59,7 +59,7 @@ Figure 1. Graphical plot of the smartphone’s triaxial accelerometer data for t
 <img src='images/weiss_sample_data.gif'>
 
 Figure 2. Sample distribution across each activity.
-<img src='images/activity_counts.svg'>
+<img src='images/activity_count.svg'>
 
 ### Algorithm and Techniques
 I chose to frame this as a sequence classification problem. Therefore, The algorithm is a 1D convolution followed by a LSTM layer. I chose an LSTM because it is good at remembering patterns in sequences. This problem has traditionally been solved with Support Vector Machines and even CNNs. However, for my case, learning the underlying the pattern in the data is more important than simply learning the data because I intend to use this model to fine-tune actual data from the developmentally disabled. 
