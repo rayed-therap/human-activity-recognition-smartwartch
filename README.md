@@ -52,14 +52,15 @@ Table 2. Field description.
 The data for the two sensors are recorded in different directories. Within each subdirectory there is a file per subject of the activities he/she performed. So there are 51 files in total in each directory. The data is read into memory and merged by timestamp. This results in a final dataset of size `(856037, 9)` because both sensor readings did not exist for all timestamps. Additionally, this process also makes the readings for some subjects inconsistent because of numerous missing values. Those data points are subsequently dropped. This is a problem with this dataset. While it claims to have supplied ample time-stamped data, the actual number of examples with the exact same timestamp is in reality quite low.
 
 ### Exploratory Visualization
-<<<<<<< HEAD
 Figure 1. Graphical plot of the smartphone’s triaxial accelerometer data for the walking activity (top) and the jogging activity (bottom) [4].
-=======
->>>>>>> Create new lable activity count diagram
-<img src='images/weiss_sample_data.gif'>
+<p align='center>
+  <img src='images/weiss_sample_data.gif'>
+</p>
 
 Figure 2. Sample distribution across each activity.
-<img src='images/activity_count.svg'>
+<p align='center'>
+  <img src='images/activity_count.svg'>
+</p>
 
 ### Algorithm and Techniques
 I chose to frame this as a sequence classification problem. Therefore, The algorithm is a 1D convolution followed by a LSTM layer. I chose an LSTM because it is good at remembering patterns in sequences. This problem has traditionally been solved with Support Vector Machines and even CNNs. However, for my case, learning the underlying the pattern in the data is more important than simply learning the data because I intend to use this model to fine-tune actual data from the developmentally disabled. 
