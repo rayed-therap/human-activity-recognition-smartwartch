@@ -53,9 +53,9 @@ Table 2. Field description.
 
 Furthermore, the data is evenly distributed with no missing or duplicate values. The values all appear realistic with little to no outliers. This is due to the fact that the measurements were taken in a controlled environment with the ambition of being high in quality. That said, the accelerometer readings are more chaotic then their gyroscope counter-parts. There were `110` values with x-axis accelertaion less than -30 m/s<sup>2</sup>. Here is a descriptive summary of the data distribution.
 
-<img src='images/har_data_stats.png'>
-
-The data for the two sensors are recorded in different directories. Within each subdirectory there is a file per subject of the activities he/she performed. So there are 51 files in total in each directory. The data is read into memory and merged by timestamp. This results in a final dataset of size `(856037, 9)` because both sensor readings did not exist for all timestamps. Additionally, this process also makes the readings for some subjects inconsistent because of numerous missing values. Those data points are subsequently dropped. This is a problem with this dataset. While it claims to have supplied ample time-stamped data, the actual number of examples with the exact same timestamp is in reality quite low.
+<p align='center'> 
+  <img src='images/har_data_stats.png'> 
+</p>
 
 ### Exploratory Visualization
 Figure 1. Graphical plot of the smartphone’s triaxial accelerometer data for the walking activity (top) and the jogging activity (bottom) [4].
@@ -121,6 +121,9 @@ Early stopping of validation loss with a patience of 5 epochs prevented overfitt
 
 ### Justification
 An accuracy of 90% on the test set is what I was hoping for. The model does not suffer from high bias or high variance given how the accuracy and loss curve closely follow each other. 
+
+The data for the two sensors are recorded in different directories. Within each subdirectory there is a file per subject of the activities he/she performed. So there are 51 files in total in each directory. The data is read into memory and merged by timestamp. This results in a final dataset of size `(856037, 9)` because both sensor readings did not exist for all timestamps. Additionally, this process also makes the readings for some subjects inconsistent because of numerous missing values. Those data points are subsequently dropped. This is a problem with this dataset. While it claims to have supplied ample time-stamped data, the actual number of examples with the exact same timestamp is in reality quite low.
+
 
 # V. Conclusion
 ### Free-Form Visualization
