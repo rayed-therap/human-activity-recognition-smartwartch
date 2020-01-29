@@ -53,11 +53,13 @@ The data for the two sensors are recorded in different directories. Within each 
 
 ### Exploratory Visualization
 Figure 1. Graphical plot of the smartphone’s triaxial accelerometer data for the walking activity (top) and the jogging activity (bottom) [4].
-<p align='center>
+
+<p align='center'>
   <img src='images/weiss_sample_data.gif'>
 </p>
 
 Figure 2. Sample distribution across each activity.
+
 <p align='center'>
   <img src='images/activity_count.svg'>
 </p>
@@ -67,7 +69,10 @@ I chose to frame this as a sequence classification problem. Therefore, The algor
 
 To achieve this, I used the 1D convolution and LSTM layers from the TensorFlow library to train this model. Here is the model architecture.
 
-<img src='images/nn_architecture.png'>
+Figure 3. Model architecture
+<p align='center'>
+  <img src='images/nn_architecture.png'>
+</p>
 
 ### Benchmark
 Numerous groups obtained numerous accuracies in the past using smartphone data. Accuracy ranged from 90% to 99% depending on the set of sensor values used and the generation of synthetic data (average, mean, standard deviation, etc). I was unable to find a study that solely relied on smartwatch data to detect human activities of daily living. Therefore, an accuracy of 90% would be acceptable given the current literature.
