@@ -27,7 +27,9 @@ The metric for this task is accuracy. Since, it is a multi-class classification 
 ### Data Exploration
 The dataset is the [3] [WISDM Smartphone and Smartwatch Activity and Biometrics Dataset Data Set](https://archive.ics.uci.edu/ml/datasets/WISDM+Smartphone+and+Smartwatch+Activity+and+Biometrics+Dataset+) which contains accelerometer and gyroscope time-series sensor data collected from a smartwatch as 51 test subjects perform 18 activities for 3 minutes each. Particulars of the dataset are summarized below:
 
-| Dataset Feature  | Value |
+Table 1. Dataset summary.
+
+| Feature  | Value |
 | ------------- | ------------- |
 | Number of subjects  | 51  |
 | Number of activities  | 5  |
@@ -36,7 +38,9 @@ The dataset is the [3] [WISDM Smartphone and Smartwatch Activity and Biometrics 
 | Smartwatch used  | LG G Watch  |
 | Number of raw measurements  | 2,003,074  |
 
-| Field Name  | Description |
+Table 2. Field description.
+
+| Field | Description |
 | ------------- | ------------- |
 | Subject-id  | Type: Symbolic numeric identififier. Uniquely identifyies the subject. Range: 1600-1650.  |
 | Activity code  | Type: Symbolic single letter. Identifies a specific activity. Range: A-S (no “N” value)  |
@@ -48,8 +52,10 @@ The dataset is the [3] [WISDM Smartphone and Smartwatch Activity and Biometrics 
 The data for the two sensors are recorded in different directories. Within each subdirectory there is a file per subject of the activities he/she performed. So there are 51 files in total in each directory. The data is read into memory and merged by timestamp. This results in a final dataset of size `(856037, 9)` because both sensor readings did not exist for all timestamps. Additionally, this process also makes the readings for some subjects inconsistent because of numerous missing values. Those data points are subsequently dropped. This is a problem with this dataset. While it claims to have supplied ample time-stamped data, the actual number of examples with the exact same timestamp is in reality quite low.
 
 ### Exploratory Visualization
+Figure 1. Graphical plot of the smartphone’s triaxial accelerometer data for the walking activity (top) and the jogging activity (bottom) [4].
 <img src='images/weiss_sample_data.gif'>
 
+Figure 2. Sample distribution across each activity.
 <img src='images/activity_counts.svg'>
 
 ### Algorithm and Techniques
