@@ -53,15 +53,13 @@ The data for the two sensors are recorded in different directories. Within each 
 
 ### Exploratory Visualization
 Figure 1. Graphical plot of the smartphone’s triaxial accelerometer data for the walking activity (top) and the jogging activity (bottom) [4].
-
 <p align='center'>
   <img src='images/weiss_sample_data.gif'>
 </p>
 
 Figure 2. Sample distribution across each activity.
-
 <p align='center'>
-  <img src='images/activity_count.svg'>
+  <img src='images/activity_count.png'>
 </p>
 
 ### Algorithm and Techniques
