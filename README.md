@@ -69,6 +69,16 @@ I chose to frame this as a sequence classification problem. Therefore, The algor
 
 To achieve this, I used the 1D convolution and LSTM layers from the TensorFlow library to train this model. Here is the model architecture.
 
+Figure 3. LSTM cell [5].
+<p align='center'>
+  <img src='images/LSTM3-var-GRU.png'>
+</p>
+
+Figure 3. Applying 1D Convolution to a sequence of text [6].
+<p align='center'>
+  <img src='images/1d_conv_with_text.png'>
+</p>
+
 Figure 3. Model architecture.
 <p align='center'>
   <img src='images/nn_architecture.png'>
@@ -127,3 +137,5 @@ A few more model variants could have been trained and evaluated. A comparision o
 3. Smartphone and Smartwatch-Based Biometrics Using Activities of Daily Living. IEEE Access, 7:133190-133202, Sept. 2019.
 4. G. M. Weiss, K. Yoneda and T. Hayajneh, "Smartphone and Smartwatch-Based Biometrics Using Activities of Daily Living," in IEEE Access, vol. 7, pp. 133190-133202, 2019.
 doi: 10.1109/ACCESS.2019.2940729
+5. Christopher Olah 2015, Understanding LSTM Networks, accessed 29 January 2020, <https://colah.github.io/posts/2015-08-Understanding-LSTMs/>
+6. Jason Brownlee 2018, How to Develop a Multichannel CNN Model for Text Classification, accessed 29 January 2020, <https://machinelearningmastery.com/develop-n-gram-multichannel-convolutional-neural-network-sentiment-analysis/>
