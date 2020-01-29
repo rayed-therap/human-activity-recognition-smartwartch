@@ -52,7 +52,10 @@ Table 2. Field description.
 The data for the two sensors are recorded in different directories. Within each subdirectory there is a file per subject of the activities he/she performed. So there are 51 files in total in each directory. The data is read into memory and merged by timestamp. This results in a final dataset of size `(856037, 9)` because both sensor readings did not exist for all timestamps. Additionally, this process also makes the readings for some subjects inconsistent because of numerous missing values. Those data points are subsequently dropped. This is a problem with this dataset. While it claims to have supplied ample time-stamped data, the actual number of examples with the exact same timestamp is in reality quite low.
 
 ### Exploratory Visualization
+<<<<<<< HEAD
 Figure 1. Graphical plot of the smartphone’s triaxial accelerometer data for the walking activity (top) and the jogging activity (bottom) [4].
+=======
+>>>>>>> Create new lable activity count diagram
 <img src='images/weiss_sample_data.gif'>
 
 Figure 2. Sample distribution across each activity.
