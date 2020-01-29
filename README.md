@@ -6,10 +6,10 @@ January 22nd, 2020
 
 # I. Definition
 ### Project Overview
-The problem of automatic identification of physical activities performed by human subjects is referred to as Human Activity Recognition (HAR) [1]. HAR is an attractive area of research due to its application in areas such as smart environments and healthcare [2], especially in the Intellectual and Developmental Disability (I/DD) space where I operate. If embedded inertial measuring units (IMU) such as accelerometers and gyroscopes found in smartphones and smartwatches can be used to  predict Activities of Daily Living (ADL), then patients with I/DD can be accurately monitored and a much better care given. As of today no such system exists. It is my goal to introduce such a mechanism.
+The problem of automatic identification of physical activities performed by human subjects is referred to as Human Activity Recognition (HAR) [1]. HAR is an attractive area of research due to its application in areas such as smart environments and healthcare [2] especially in the Intellectual and Developmental Disability (I/DD). If embedded inertial measuring units (IMU) such as accelerometers and gyroscopes found in smartphones and smartwatches can be used to predict Activities of Daily Living (ADL), then motion-based behavioral biometrics of patients with I/DD can be accurately recorded and montired, even when they are not being attended by their Direct Support Staff (DSP). This has the potential to aid agencies that support I/DD patients to provide much better health care and possibly detect physiological episodes before they occur. Additionally, smartwatches and smartphones also have the added advantage of being unobtrusive which adds to their appeal and acceptability with I/DD patients. As of today, no such system exists. It is my desire to introduce such a mechanism.
 
 ### Problem Statement
-The goal is to use raw accelerometer and gyroscope smartwatch data to classify 5 Activities of Daily Living. The activities are:
+Through this project I wish to investigate the feasibility of using smartwatch data to accurately identify human activities. As such, my goal is to use raw accelerometer and gyroscope smartwatch data to classify 5 Activities of Daily Living. The activities are:
 1. Walking
 2. Jogging
 3. Sitting
@@ -27,7 +27,7 @@ The metric for this task is accuracy. Since, it is a multi-class classification 
 
 # II. Analysis
 ### Data Exploration
-The dataset is the [WISDM Smartphone and Smartwatch Activity and Biometrics Dataset Data Set](https://archive.ics.uci.edu/ml/datasets/WISDM+Smartphone+and+Smartwatch+Activity+and+Biometrics+Dataset+) [3] which contains accelerometer and gyroscope time-series sensor data collected from a smartwatch as 51 test subjects perform 18 activities for 3 minutes each. Particulars of the dataset are summarized below:
+The dataset is the [WISDM Smartphone and Smartwatch Activity and Biometrics Dataset Data Set](https://archive.ics.uci.edu/ml/datasets/WISDM+Smartphone+and+Smartwatch+Activity+and+Biometrics+Dataset+) [3] which contains accelerometer and gyroscope time-series sensor data collected from a mounted smartphone and smartwatch as 51 test subjects perform 18 activities for 3 minutes each. For my problem, I am only using the smartwatch data. Particulars of the dataset are summarized below:
 
 Table 1. Dataset summary.
 
@@ -65,7 +65,7 @@ Figure 2. Sample distribution across each activity.
 </p>
 
 ### Algorithm and Techniques
-I chose to frame this as a sequence classification problem. Therefore, The algorithm is a 1D convolution followed by a LSTM layer. I chose an LSTM because it is good at remembering patterns in sequences. This problem has traditionally been solved with Support Vector Machines and even CNNs. However, for my case, learning the underlying the pattern in the data is more important than simply learning the data because I intend to use this model to fine-tune actual data from the developmentally disabled. 
+I chose to frame this task as a sequence classification problem. Therefore, The algorithm is a 1D convolution followed by a LSTM layer. I chose an LSTM because it is good at remembering patterns in sequences. This problem has traditionally been solved with Support Vector Machines and even CNNs. However, for my case, learning the underlying the pattern in the data is more important than simply learning the data because I intend to use this model to fine-tune actual data from the developmentally disabled. 
 
 To achieve this, I used the 1D convolution and LSTM layers from the TensorFlow library to train this model. Here is the model architecture.
 
