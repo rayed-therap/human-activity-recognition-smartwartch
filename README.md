@@ -59,7 +59,7 @@ Figure 1. Graphical plot of the smartphone’s triaxial accelerometer data for t
 
 Figure 2. Sample distribution across each activity.
 <p align='center'>
-  <img src='images/activity_count.png'>
+  <img src='images/activity_count.svg'>
 </p>
 
 ### Algorithm and Techniques
@@ -67,7 +67,7 @@ I chose to frame this as a sequence classification problem. Therefore, The algor
 
 To achieve this, I used the 1D convolution and LSTM layers from the TensorFlow library to train this model. Here is the model architecture.
 
-Figure 3. Model architecture
+Figure 3. Model architecture.
 <p align='center'>
   <img src='images/nn_architecture.png'>
 </p>
