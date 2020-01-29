@@ -74,12 +74,12 @@ Figure 3. LSTM cell [5].
   <img src='images/LSTM3-var-GRU.png'>
 </p>
 
-Figure 3. Applying 1D Convolution to a sequence of text [6].
+Figure 4. Applying 1D Convolution to a sequence of text [6].
 <p align='center'>
   <img src='images/1d_conv_with_text.png'>
 </p>
 
-Figure 3. Model architecture.
+Figure 5. Custom model architecture.
 <p align='center'>
   <img src='images/nn_architecture.png'>
 </p>
