@@ -9,14 +9,14 @@ January 22nd, 2020
 The problem of automatic identification of physical activities performed by human subjects is referred to as Human Activity Recognition (HAR) [1]. HAR is an attractive area of research due to its application in areas such as smart environments and healthcare [2] especially in the Intellectual and Developmental Disability (I/DD). If embedded inertial measuring units (IMU) such as accelerometers and gyroscopes found in smartphones and smartwatches can be used to predict Activities of Daily Living (ADL), then motion-based behavioral biometrics of patients with I/DD can be accurately recorded and montired, even when they are not being attended by their Direct Support Staff (DSP). This has the potential to aid agencies that support I/DD patients to provide much better health care and possibly detect physiological episodes before they occur. Additionally, smartwatches and smartphones also have the added advantage of being unobtrusive which adds to their appeal and acceptability with I/DD patients. As of today, no such system exists. It is my desire to introduce such a mechanism.
 
 ### Problem Statement
-Through this project I wish to investigate the feasibility of using smartwatch data to accurately identify human activities. As such, my goal is to use raw accelerometer and gyroscope smartwatch data to classify 5 Activities of Daily Living. The activities are:
+In this project I wish to investigate the feasibility of using smartwatch sensor data to accurately identify human activities. As such, my goal is to use raw accelerometer and gyroscope readings and classify 5 Activities of Daily Living. The activities are:
 1. Walking
 2. Jogging
 3. Sitting
 4. Standing
 5. Climbing stairs
 
-I intend to preprocess the data into sequences of length 60 (corresponding to 3 seconds of data) using the triaxial accelerometer and gyroscope readings as features (6 in total) and train a LSTM network. It is my hope that the LSTM layer will be able to learn the patterns inherent in these activities and prove to be a robust classifier. Furthermore, I hope that this model can be used for other downstream tasks such as human identification [4]. 
+I wish to conduct my study by preprocessing the data into sequences of length 60 (corresponding to 3 seconds of data) using the triaxial accelerometer and gyroscope readings as features (6 in total) and train a LSTM network. I am chosing an LSTM network because I believe it will be able to learn the patterns inherent in these activities and hence, be a more robust classifier as opposed to statistical models such as Decision Trees and SVMs. Furthermore, I hope to use it for other downstream tasks such as human identification in the future [4]. 
 
 ### Metrics
 The metric for this task is accuracy. Since, it is a multi-class classification task with a balanced dataset, a simple accuracy score will suffice to measure the model's performance. Accuracy is defined as follows:
