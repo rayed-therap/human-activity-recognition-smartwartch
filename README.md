@@ -21,7 +21,9 @@ I intend to preprocess the data into sequences of length 60 (corresponding to 3 
 ### Metrics
 The metric for this task is accuracy. Since, it is a multi-class classification task with a balanced dataset, a simple accuracy score will suffice to measure the model's performance. Accuracy is defined as follows:
 
-**Accuracy = (TP + TN) / (TP + FP + FN + TN)**
+<p align='center'>
+  <strong>Accuracy = (TP + TN) / (TP + FP + FN + TN)</strong>
+</p>
 
 # II. Analysis
 ### Data Exploration
