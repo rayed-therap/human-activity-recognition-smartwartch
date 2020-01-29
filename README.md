@@ -16,6 +16,8 @@ The goal is to use raw accelerometer and gyroscope smartwatch data to classify 5
 4. Standing
 5. Climbing stairs
 
+I intend to preprocess the data into sequences of length 60 (corresponding to 3 seconds of data) using the triaxial accelerometer and gyroscope readings as features (6 in total) and train a LSTM network. It is my hope that the LSTM layer will be able to learn the patterns inherent in these activities and prove to be a robust classifier. Furthermore, I hope that this model can be used for other downstream tasks such as human identification [4]. 
+
 ### Metrics
 The metric for this task is accuracy. Since, it is a multi-class classification task with a balanced dataset, a simple accuracy score will suffice to measure the model's performance. Accuracy is defined as follows:
 
@@ -108,3 +110,5 @@ A few more model variants could have been trained and evaluated. A comparision o
 1. Antonio Bevilacqua, Kyle MacDonald, Aamina Rangarej, Venessa Widjaya, Brian Caulfield, Tahar Kechadi, “Human Activity Recognition with Convolutional Neural Networks”, arXiv:1906.01935v1 [cs], June 2019.
 2. Artur Jordao, Antonio C. Nazare Jr., Jessica Sena, William Robson Schwartz, “Human Activity Recognition Based on Wearable Sensor Data: A Standardization of the State-of-the-Art”, arXiv:1806.05226v3 [cs], February 2019.
 3. Smartphone and Smartwatch-Based Biometrics Using Activities of Daily Living. IEEE Access, 7:133190-133202, Sept. 2019.
+4. G. M. Weiss, K. Yoneda and T. Hayajneh, "Smartphone and Smartwatch-Based Biometrics Using Activities of Daily Living," in IEEE Access, vol. 7, pp. 133190-133202, 2019.
+doi: 10.1109/ACCESS.2019.2940729
