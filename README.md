@@ -68,7 +68,9 @@ Figure 2. Sample distribution across each activity.
   <img src='images/activity_count.svg' width='600px'>
 </p>
 
-The data looks as I expected. Continuous, time-series data in which the triaxes are distinct and seperate. There does not seem to be any outliers and the prediction classes are distributed evenly. 
+The data looks as I expected. Continuous with clear trends in time. There does not seem to be any outliers. However, it remains to be seen whether 
+
+Additionally, the prediction classes are distributed evenly and well represented in number. 
 
 ### Algorithm and Techniques
 I chose to frame this task as a sequence classification problem. Therefore, The algorithm is a 1D convolution followed by a LSTM layer. I chose an LSTM because it is good at remembering patterns in sequences. This problem has traditionally been solved with Support Vector Machines and even CNNs. However, for my case, learning the underlying the pattern in the data is more important than simply learning the data itself because I intend to use this model to fine-tune actual data from the developmentally disabled. 
