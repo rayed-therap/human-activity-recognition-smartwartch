@@ -58,7 +58,7 @@ Furthermore, the data is evenly distributed with no missing or duplicate values.
 </p>
 
 ### Exploratory Visualization
-Figure 1. Graphical plot of the smartphone’s triaxial accelerometer data for the walking activity (top) and the jogging activity (bottom) [4].
+Figure 1. Graphical plot of the smartwatch triaxial accelerometer data for the walking.
 <p align='center'>
   <img src='images/accel_xyz.png' width='600px'>
 </p>
@@ -68,9 +68,9 @@ Figure 2. Sample distribution across each activity.
   <img src='images/activity_count.svg' width='600px'>
 </p>
 
-The data looks as I expected. Continuous with clear trends in time. There does not seem to be any outliers. However, it remains to be seen whether 
+The data represents a subject's walking triaxial accelerometer data for a period of 5 seconds picked randomly. It looks as expected with clear continuous trends. There does not seem to be any disruptive outliers. The gyroscope data not show here is even more symmetric. The authors reported having some problems with their accelerometer readings for some subjects. The accelerometer logged more readings than the gyroscope and they were unable to substantiate why that was the case. For my purpose, I will take the data with a grain of salt and check to see for inaccuracies.   
 
-Additionally, the prediction classes are distributed evenly and well represented in number. 
+Additionally, the prediction classes are distributed evenly and well represented in number.
 
 ### Algorithm and Techniques
 I chose to frame this task as a sequence classification problem. Therefore, The algorithm is a 1D convolution followed by a LSTM layer. I chose an LSTM because it is good at remembering patterns in sequences. This problem has traditionally been solved with Support Vector Machines and even CNNs. However, for my case, learning the underlying the pattern in the data is more important than simply learning the data itself because I intend to use this model to fine-tune actual data from the developmentally disabled. 
