@@ -2,9 +2,10 @@
 wisdm-dataset/
 *.zip
 
-#
+# logs
 logs/
 
 # notebook and cache
+.vscode/
 .ipynb_checkpoints/
 __pycache__/
