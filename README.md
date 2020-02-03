@@ -1,24 +1,25 @@
 # Human Activity Recognition From Inertial Sensors
-### Machine Learning Engineer Nanodegree Project Report
+## Machine Learning Engineer Nanodegree Project Report
 Md. Rayed Bin Wahed
 
-January 22nd, 2020
+January 22<sup>nd</sup>, 2020
 
 # I. Definition
-### Project Overview
-The problem of automatic identification of physical activities performed by human subjects is referred to as Human Activity Recognition (HAR) [1]. HAR is an attractive area of research due to its application in areas such as smart environments and healthcare [2] especially in the Intellectual and Developmental Disability (I/DD). If embedded inertial measuring units (IMU) such as accelerometers and gyroscopes found in smartphones and smartwatches can be used to predict Activities of Daily Living (ADL), then motion-based behavioral biometrics of patients with I/DD can be accurately recorded and monitored, even when they are not being attended by their Direct Support Staff (DSP). This has the potential to aid agencies that support I/DD patients to provide much better health care and possibly detect physiological episodes before they occur. Additionally, smartwatches and smartphones also have the added advantage of being unobtrusive which adds to their appeal and acceptability with I/DD patients. As of today, no such system exists. It is my desire to introduce such a mechanism.
+## Project Overview
+The problem of automatic identification of physical activities performed by human subjects is referred to as Human Activity Recognition (HAR) [1]. HAR is an attractive area of research due to its application in areas such as smart environments and healthcare [2]. It is even more so relevant in the Intellectual and Developmental Disability (I/DD) space. If embedded Inertial Measurement Units (IMU) such as accelerometers and gyroscopes found in smartphones and smartwatches can be used to predict Activities of Daily Living (ADL), then motion-based behavioral biometrics of patients with I/DD can be accurately recorded and monitored even when they are not being supervised by their Direct Support Staff (DSP). This has the potential to aid agencies that support I/DD patients provide much better health care and possibly detect harmful physiological incidents before they occur. Additionally, smartwatches and smartphones have the added advantage of being unobtrusive which adds to their appeal and acceptability with I/DD patients. As of today, no such system exists. It is my intention to introduce such a mechanism.
 
-### Problem Statement
-In this project I wish to investigate the feasibility of using smartwatch sensor data to accurately identify human activities. As such, my goal is to use raw accelerometer and gyroscope readings and classify 5 Activities of Daily Living. The activities are:
+## Problem Statement
+In this project I wish to investigate the feasibility of using smartwatch sensor data to accurately identify human activities. My goal is to use raw accelerometer and gyroscope readings and classify 5 Activities of Daily Living. The activities are:
+
 1. Walking
 2. Jogging
 3. Sitting
 4. Standing
 5. Climbing stairs
 
-I wish to conduct my study by preprocessing the data into sequences of length 60 (corresponding to 3 seconds of data) using the triaxial accelerometer and gyroscope readings as features (6 in total) and train a LSTM network. I am chosing an LSTM network because I believe it will be able to learn the patterns inherent in these activities and hence, be a more robust classifier as opposed to statistical models such as Decision Trees and SVMs. Furthermore, I hope to use it for other downstream tasks such as human identification in the future [4]. 
+I wish to preprocess the data into sequences of length 60 (corresponding to 3 seconds of data) using the triaxial accelerometer and gyroscope readings as features (6 in total) and train a LSTM network. I am chosing an LSTM network because I believe it will be able to learn the patterns inherent in these activities and hence, be a more robust classifier as opposed to statistical models such as Decision Trees and SVMs. Furthermore, I hope to use this model for other downstream tasks such as human identification in the future [4]. 
 
-### Metrics
+## Metrics
 The metric for this task is accuracy. Since, it is a multi-class classification task with a balanced dataset, a simple accuracy score will suffice to measure the model's performance. Accuracy is defined as follows:
 
 <p align='center'>
@@ -26,8 +27,8 @@ The metric for this task is accuracy. Since, it is a multi-class classification 
 </p>
 
 # II. Analysis
-### Data Exploration
-The dataset is the [WISDM Smartphone and Smartwatch Activity and Biometrics Dataset](https://archive.ics.uci.edu/ml/datasets/WISDM+Smartphone+and+Smartwatch+Activity+and+Biometrics+Dataset+) [3] which contains accelerometer and gyroscope time-series sensor data collected from a mounted smartphone and smartwatch as 51 test subjects perform 18 activities for 3 minutes each. For my problem, I am only using the smartwatch data. Particulars of the dataset are summarized below:
+## Data Exploration
+The dataset is the [WISDM Smartphone and Smartwatch Activity and Biometrics Dataset](https://archive.ics.uci.edu/ml/datasets/WISDM+Smartphone+and+Smartwatch+Activity+and+Biometrics+Dataset+) [3] which contains accelerometer and gyroscope time-series sensor data collected from a smartphone and smartwatch as 51 test subjects perform 18 activities for 3 minutes each. For this project I will only be considering smartwatch data. Particulars of the dataset are summarized below:
 
 Table 1. Dataset summary.
 
@@ -44,20 +45,20 @@ Table 2. Field description.
 
 | Field | Description |
 | ------------- | ------------- |
-| Subject-id  | Type: Symbolic numeric identififier. Uniquely identifyies the subject. Range: 1600-1650.  |
+| Subject id  | Type: Symbolic numeric identififier. Uniquely identifyies the subject. Range: 1600-1650.  |
 | Activity code  | Type: Symbolic single letter. Identifies a specific activity. Range: A-S (no “N” value)  |
 | Timestamp  | Type: Integer. Linux time  |
-| x  | Type: Real. Sensor value for x axis. May be positive or negative. m/s<sup>2</sup> for acceleration and radians/s for gyroscope |
-| y  | Same as x but for y axis  |
-| z  | Same as x but for z axis  |
+| x  | Type: Real. Sensor value for x-axis measured in m/s<sup>2</sup> for acceleration and radians/s for gyroscope. May be positive or negative.|
+| y  | Same as x but for y-axis  |
+| z  | Same as x but for z-axis  |
 
-Furthermore, the data is evenly distributed with no missing or duplicate values. The values all appear realistic with little to no outliers. This is due to the fact that the measurements were taken in a controlled environment with the ambition of being high in quality. That said, the accelerometer readings are more chaotic then their gyroscope counter-parts. There were `110` values with x-axis accelertaion less than -30 m/s<sup>2</sup>. Here is a descriptive summary of the data distribution.
+Furthermore, the data is evenly distributed with no missing or duplicate values. The values all appear realistic with little to no outliers. This is because the measurements were taken in a controlled environment. That said, the range of acceleration values is much greater and the number of readings captured per interval is consistent. H
 
 <p align='center'> 
   <img src='images/har_data_stats.png'> 
 </p>
 
-### Exploratory Visualization
+## Exploratory Visualization
 Figure 1. Graphical plot of the smartwatch triaxial accelerometer data for the walking.
 <p align='center'>
   <img src='images/accel_xyz.png' width='600px'>
