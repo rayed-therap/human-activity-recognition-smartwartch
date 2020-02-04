@@ -103,10 +103,10 @@ Figure 5. Custom model architecture.
 The diagram above shows the actual network architecture used. The LSTM feeds-forward to a dense layer which applies a dropout of probability 0.2. Following the dropout layer is another dense layer that applies the softmax function to output probabilities of the 5 classes. The class with the highest probability is considered as the network's prediction.
 
 ## Benchmark
-Different groups obtained numerous accuracies in the past using smartphone data. Accuracy ranged from 90% to 99% depending on the set of sensor values used and the generation of synthetic data (average, mean, standard deviation, etc). I was unable to find a study that solely relied on smartwatch data to detect human activities of daily living. Therefore, an accuracy of 90% would be acceptable given the current literature.
+In the past, different groups obtained various accuracies using smartphone data. Accuracy ranged from 90% to 99% depending on the set of sensor values used and the generation of synthetic data (average, mean, standard deviation, etc). I was unable to find a study that solely relied on smartwatch data. Therefore, I trained a baseline SVM model with 50000 data-points and obtained an accuracy of 70%. With my LSTM model, I aspire to do substantially better.
 
 # III. Methodology
-### Data Preprocessing
+## Data Preprocessing
 The data was preprocessed in the following ways:
 1. Merge acceleration and gyroscope data to obtain 6 features (triaxes of accelerometer and gyroscope).
 2. The sensor readings were clipped in the range `(-30, 30)`.
@@ -116,12 +116,12 @@ The data was preprocessed in the following ways:
 6. The dataset was split into 80% training data and 20% test data.
 7. The training dataset was further split into 20% validation data.
 
-### Implementation
+## Implementation
 During my inspection phase, I had to decide how best to combine the data. If I combined based on timestamp, the number of data points were severly reduced. On the otherhand, what do I do for an activity for which the accelerometer and gyroscope readings varied significantly in number. In order to decide, I had to create both dataset and see which performed better. The former provided better accuracy despite producing a lower dataset size. Writing the preprocessing code itself provided numerous challenges and required significant effort to verify the integrity of the data.
 
 Deciding the sequence length was also challenging. Arthur et al [2], found 10 second intervals to be ideal. For me 3 seconds worked well since I want to provide real-time predictions.
 
-### Refinement
+## Refinement
 The network architecture gave very different results with each set of hyperparameters. The number of filters in the 1D convolution layer and hidden units in the LSTM layer had to be significantly tuned in order to get a good score. I also stacked 2 LSTMs but couldn't recognize a decent improvement. Lastly, the dropout rate and units in the densely connected layer were selected by monitoring activation maps in tensorboard.
 
 Learning rate scheduler was used to train the model to gradually decrease the learning rate as the trained progressed. This prevented abnormal spikes in the training process and made the model more robust. 
@@ -129,7 +129,7 @@ Learning rate scheduler was used to train the model to gradually decrease the le
 Early stopping of validation loss with a patience of 5 epochs prevented overfitting the data.
 
 # IV. Results
-### Model Evaluation and Validation
+## Model Evaluation and Validation
 Figure 6. Training (orange) and testing (blue) Epoch vs Accuracy graph
 
 <img src='images/epoch_accuracy.svg'>
@@ -138,21 +138,21 @@ Figure 7. Training (orange) and testing (blue) Epoch vs Loss graph
 
 <img src='images/epoch_loss.svg'>
 
-### Justification
-An accuracy of 90% on the test set is what I was hoping for. The model does not suffer from high bias or high variance given how the accuracy and loss curve closely follow each other. 
+## Justification
+An accuracy of 90% on the test set is what I was hoping for. The model does not suffer from high bias or high variance given how the accuracy and loss curves closely follow each other. 
 
 
 # V. Conclusion
-### Free-Form Visualization
+## Free-Form Visualization
 
 <img src='images/accel_walking_x.png'>
 
 The diagram above highlights the inconsistency present in such a large dataset that had to be found and processed.
 
-### Reflection
+## Reflection
 The project covered the entire ML pipeline from data collection, preprocessing, visualization, to model training and evaluation. I realized that data wrangling is the most important and time consuming aspect in the entire process and was the bottle-neck for me. 
 
-### Improvement
+## Improvement
 Firstly, some synthetic data might have helped in this case. For instance, the mean, standard deviation, and other statistics could have been calculated for each timestamp and added as features. This might have helped the network segregate the classes and better and lead to a better accuracy. 
 
 A few more model variants could have been trained and evaluated. A comparision of different architectures such as DNN, CNN, and statistical models like SVMs could have also been analyzed.
