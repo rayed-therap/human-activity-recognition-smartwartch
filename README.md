@@ -9,7 +9,7 @@ January 22<sup>nd</sup>, 2020
 The problem of automatic identification of physical activities performed by human subjects is referred to as Human Activity Recognition (HAR) [1]. HAR is an attractive area of research due to its application in areas such as smart environments and healthcare [2]. It is even more so relevant in the Intellectual and Developmental Disability (I/DD) space. If embedded Inertial Measurement Units (IMU) such as accelerometers and gyroscopes found in smartphones and smartwatches can be used to predict Activities of Daily Living (ADL), then motion-based behavioral biometrics of patients with I/DD can be accurately recorded and monitored even when they are not being supervised by their Direct Support Staff (DSP). This has the potential to aid agencies that support I/DD patients provide much better health care and possibly detect harmful physiological incidents before they occur. Additionally, smartwatches and smartphones have the added advantage of being unobtrusive which adds to their appeal and acceptability with I/DD patients. As of today, no such system exists. It is my intention to introduce such a mechanism.
 
 ## Problem Statement
-In this project I wish to investigate the feasibility of using smartwatch sensor data to accurately identify human activities. My goal is to use raw accelerometer and gyroscope readings and classify 5 Activities of Daily Living. The activities are:
+My goal is to investigate the feasibility of using smartwatch sensor data to accurately identify human activities. I will use raw accelerometer and gyroscope readings to classify 5 Activities of Daily Living. The activities are:
 
 1. Walking
 2. Jogging
@@ -17,7 +17,7 @@ In this project I wish to investigate the feasibility of using smartwatch sensor
 4. Standing
 5. Climbing stairs
 
-I wish to preprocess the data into sequences of length 60 (corresponding to 3 seconds of data) using the triaxial accelerometer and gyroscope readings as features (6 in total) and train a LSTM network. I am chosing an LSTM network because I believe it will be able to learn the patterns inherent in these activities and hence, be a more robust classifier as opposed to statistical models such as Decision Trees and SVMs. Furthermore, I hope to use this model for other downstream tasks such as human identification in the future [4]. 
+I will preprocess the data into sequences of length 60 (corresponding to 3 seconds of data) using the triaxial accelerometer and gyroscope readings as features (6 in total) and train a LSTM network. I am chosing an LSTM network because I believe it will be able to learn the patterns inherent in these activities and hence, be a more robust classifier as opposed to statistical models such as Decision Trees and SVMs which historically have difficulties with time-series data.
 
 ## Metrics
 The metric for this task is accuracy. Since, it is a multi-class classification task with a balanced dataset, a simple accuracy score will suffice to measure the model's performance. Accuracy is defined as follows:
@@ -28,7 +28,7 @@ The metric for this task is accuracy. Since, it is a multi-class classification 
 
 # II. Analysis
 ## Data Exploration
-The dataset is the [WISDM Smartphone and Smartwatch Activity and Biometrics Dataset](https://archive.ics.uci.edu/ml/datasets/WISDM+Smartphone+and+Smartwatch+Activity+and+Biometrics+Dataset+) [3] which contains accelerometer and gyroscope time-series sensor data collected from a smartphone and smartwatch as 51 test subjects perform 18 activities for 3 minutes each. For this project I will only be considering smartwatch data. Particulars of the dataset are summarized below:
+The dataset is the [WISDM Smartphone and Smartwatch Activity and Biometrics Dataset](https://archive.ics.uci.edu/ml/datasets/WISDM+Smartphone+and+Smartwatch+Activity+and+Biometrics+Dataset+) [3] which contains accelerometer and gyroscope time-series sensor readings collected from a smartphone and smartwatch as 51 test subjects perform 18 activities for 3 minutes each. For this project I will only be considering smartwatch data. Particulars of the dataset are summarized below:
 
 Table 1. Dataset summary.
 
@@ -52,56 +52,57 @@ Table 2. Field description.
 | y  | Same as x but for y-axis  |
 | z  | Same as x but for z-axis  |
 
-Furthermore, the data is evenly distributed with no missing or duplicate values. The values all appear realistic with little to no outliers. This is because the measurements were taken in a controlled environment. That said, the range of acceleration values is much greater and the number of readings captured per interval is consistent. H
+Table 3. Dataset statistics.
 
-<p align='center'> 
-  <img src='images/har_data_stats.png'> 
-</p>
+<img src='images/har_data_stats.png'> 
+
+The data is evenly distributed with no missing or duplicate values. The values all appear realistic with little to no outliers. This is because the measurements were taken in a controlled environment. That said, the range of acceleration values is much greater than the corresponding gyroscope values. Furthermore, the number of acceleration readings captured per interval is inconsistent as well. The table represents values after they are merged according to timestamp and that is the reason why the final count is much lower than the total number of data-points available. The authors of the dataset were unable to substantiate why that is the case.
 
 ## Exploratory Visualization
-Figure 1. Graphical plot of the smartwatch triaxial accelerometer data for the walking.
+Figure 1. Graphical plot of the smartwatch triaxial accelerometer data for walking.
 <p align='center'>
   <img src='images/accel_xyz.png' width='600px'>
 </p>
+The plot represents a subject's walking triaxial accelerometer data for a period of 5 seconds picked randomly. It looks as expected with clear continuous trends. There does not seem to be any disruptive outliers. The gyroscope data not show here is even more symmetric.
 
 Figure 2. Sample distribution across each activity.
 <p align='center'>
   <img src='images/activity_count.svg' width='600px'>
 </p>
 
-The data represents a subject's walking triaxial accelerometer data for a period of 5 seconds picked randomly. It looks as expected with clear continuous trends. There does not seem to be any disruptive outliers. The gyroscope data not show here is even more symmetric. The authors reported having some problems with their accelerometer readings for some subjects. The accelerometer logged more readings than the gyroscope and they were unable to substantiate why that was the case. For my purpose, I will take the data with a grain of salt and check to see for inaccuracies.   
+The prediction classes are distributed evenly and well represented in number.
 
-Additionally, the prediction classes are distributed evenly and well represented in number.
-
-### Algorithm and Techniques
-I chose to frame this task as a sequence classification problem. Therefore, The algorithm is a 1D convolution followed by a LSTM layer. I chose an LSTM because it is good at remembering patterns in sequences. This problem has traditionally been solved with Support Vector Machines and even CNNs. However, for my case, learning the underlying the pattern in the data is more important than simply learning the data itself because I intend to use this model to fine-tune actual data from the developmentally disabled. 
-
-At the very core, LSTMs solve the long-term dependecy problem evident in simple RNNs and other types of neural networks. This hinges on the idea that in order to make a prediction for the present step, we may need to rely on data that the network saw in previous timestamps. Propagating useful information throughout the work such that it can be used to make wiser predictions in the future is what sets the LSTM apart and particulary usefule for time-series data. 
-
-So how does it do it. The key to LSTMs is the cell state, the horizontal line running through the top of the diagram. The cell state is kind of like a conveyor belt. It runs straight down the entire chain, with only some minor linear interactions. It’s very easy for information to just flow along it unchanged. The LSTM has the ability to remove or add information to the cell state by carefully regulated by structures called gates [5].
-
-Gates are a way to optionally let information through. They are composed out of a sigmoid neural net layer and a pointwise multiplication operation. The sigmoid layer outputs numbers between zero and one, describing how much of each component should be let through. A value of zero means “let nothing through,” while a value of one means “let everything through!” [5].
-
-An LSTM has three of these gates to protect and control the cell state as shown below.
+## Algorithm and Techniques
+This problem has traditionally been solved with Support Vector Machines and CNNs. However, I chose to frame this as a time-series sequence classification task. Therefore, my underlying algorithm is a 1D convolution followed by a LSTM layer. I chose an LSTM because it is a proven architecture for remembering patterns in sequences. Let's briefly take a look at what a LSTM is. 
 
 Figure 3. LSTM cell [5].
 <p align='center'>
   <img src='images/LSTM3-var-GRU.png'>
 </p>
 
-Convolutions on the other hand are a set of linear transformation filters that extracts local 1D patches to identify patterns within the window of convolution. And because the same transformation is applied on every patch identified by the window, a pattern learnt at one position can also be recognized at a different position, making 1D conv nets translation invariant [7].
+At the very core, LSTMs solve the long-term dependecy problem evident in simple RNNs and other types of neural networks. This hinges on the idea that in order to make a prediction for the present step, we may need to rely on data that the network saw in previous timestamps. Propagating useful information throughout the network such that it can be used to make wiser predictions later on is what sets the LSTM apart and particulary useful for time-series data. 
+
+So how does it do this. The key to LSTMs is the cell state, the horizontal line running through the top of the diagram. The cell state is kind of like a conveyor belt. It runs straight down the entire chain, with only some minor linear interactions. It’s very easy for information to just flow along it unchanged. The LSTM has the ability to remove or add information to the cell state by carefully regulated structures called gates [5].
+
+Gates are a way to optionally let information through. They are composed out of a sigmoid neural net layer and a pointwise multiplication operation. The sigmoid layer outputs numbers between zero and one, describing how much of each component should be let through. A value of zero means “let nothing through,” while a value of one means “let everything through!” [5].
+
+An LSTM has three of these gates to protect and control the cell state shown above. They are: _input gate, forget gate, and output gate_.
 
 Figure 4. Applying 1D Convolution to a sequence of text [6].
 <p align='center'>
   <img src='images/1d_conv_with_text.png'>
 </p>
 
+Convolutions on the other hand are a set of linear transformation filters that extracts local 1D patches to identify patterns within the window of convolution. And because the same transformation is applied on every patch identified by the window, a pattern learnt at one position can also be recognized at a different position, making 1D conv nets translation invariant [7]. The diagram above shows a depiction of text data but the same idea is true for any time-stepped sequence.
+
 Figure 5. Custom model architecture.
 <p align='center'>
   <img src='images/nn_architecture.png'>
 </p>
 
-### Benchmark
+The diagram above shows the actual network architecture used. The LSTM feeds-forward to a dense layer which applies a dropout of probability 0.2. Following the dropout layer is another dense layer that applies the softmax function to output probabilities of the 5 classes. The class with the highest probability is considered as the network's prediction.
+
+## Benchmark
 Different groups obtained numerous accuracies in the past using smartphone data. Accuracy ranged from 90% to 99% depending on the set of sensor values used and the generation of synthetic data (average, mean, standard deviation, etc). I was unable to find a study that solely relied on smartwatch data to detect human activities of daily living. Therefore, an accuracy of 90% would be acceptable given the current literature.
 
 # III. Methodology
